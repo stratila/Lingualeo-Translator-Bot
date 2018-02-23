@@ -4,6 +4,7 @@
     <list default="true" id="488df3cb-45c1-40ba-be97-6a8879f83e20" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/LinguaLeoTranslatorBot.py" afterPath="$PROJECT_DIR$/LinguaLeoTranslatorBot.py" />
+      <change beforePath="$PROJECT_DIR$/tgtypes.py" afterPath="$PROJECT_DIR$/tgtypes.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -27,11 +28,21 @@
       <file leaf-file-name="LinguaLeoTranslatorBot.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/LinguaLeoTranslatorBot.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="305">
-              <caret line="105" column="39" lean-forward="true" selection-start-line="105" selection-start-column="39" selection-end-line="105" selection-end-column="39" />
+            <state relative-caret-position="17">
+              <caret line="50" column="38" lean-forward="true" selection-start-line="50" selection-start-column="38" selection-end-line="50" selection-end-column="38" />
               <folding>
                 <element signature="e#0#47#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="tgtypes.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tgtypes.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="194">
+              <caret line="104" column="13" lean-forward="false" selection-start-line="104" selection-start-column="13" selection-end-line="104" selection-end-column="13" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -45,6 +56,7 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/requirements.txt" />
+        <option value="$PROJECT_DIR$/tgtypes.py" />
         <option value="$PROJECT_DIR$/LinguaLeoTranslatorBot.py" />
       </list>
     </option>
@@ -150,7 +162,21 @@
       <option name="project" value="LOCAL" />
       <updated>1519384691548</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="fix command handler">
+      <created>1519386340545</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1519386340545</updated>
+    </task>
+    <task id="LOCAL-00003" summary="fix message clase voice field">
+      <created>1519386686456</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1519386686456</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -188,7 +214,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="fix req2" />
     <MESSAGE value="fix command handler" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix command handler" />
+    <MESSAGE value="fix message clase voice field" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix message clase voice field" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -203,10 +230,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/tgtypes.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="194">
+          <caret line="104" column="13" lean-forward="false" selection-start-line="104" selection-start-column="13" selection-end-line="104" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/LinguaLeoTranslatorBot.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="305">
-          <caret line="105" column="39" lean-forward="true" selection-start-line="105" selection-start-column="39" selection-end-line="105" selection-end-column="39" />
+        <state relative-caret-position="17">
+          <caret line="50" column="38" lean-forward="true" selection-start-line="50" selection-start-column="38" selection-end-line="50" selection-end-column="38" />
           <folding>
             <element signature="e#0#47#0" expanded="true" />
           </folding>

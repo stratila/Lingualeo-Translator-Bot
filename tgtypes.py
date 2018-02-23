@@ -72,7 +72,7 @@ class Message():
 
         rtm = message_dict.get('reply_to_message')
         if rtm is not None:
-            ffc = Message(rtm)
+            rtm = Message(rtm)
         self.ReplyToMessage = rtm
 
 

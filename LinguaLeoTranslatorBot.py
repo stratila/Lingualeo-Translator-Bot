@@ -10,6 +10,8 @@ from os import path
 import os
 import urllib.request
 import cloudconvert
+import random
+import string
 
 
 app = Flask(__name__)
@@ -22,6 +24,9 @@ voice_client = Wit(access_token="EFM2XCEDOKQVQDA5PGDYWEZYH3PXMYOT")
 @app.route('/')
 def hello_world():
     return 'Telegram app'
+
+def id_generator(size=6, chars=string.ascii_uppercase + string.digits):
+    return ''.join(random.choice(chars) for _ in range(size))
 
 
 def handle_command(update):
@@ -47,12 +52,14 @@ def handle_voice(update):
         messages = ["Something goes wrong!😢","Try again. 😉"]
         for txt in messages:
             bot.send_message(chat_id=chat_id,text = txt)
+
     file_path = voice_info.get("result").get("file_path")
     url = "https://api.telegram.org/file/bot{}/{}".format(bot.token,file_path)
 
+    file_name = id_generator()
 
     with urllib.request.urlopen(url) as f:
-        with open(file_path+'.ogg', 'wb') as fin:
+        with open(file_name+'.ogg', 'wb') as fin:
             fin.write(f.read()) # create ogg file
 
     process = None
@@ -61,14 +68,14 @@ def handle_voice(update):
             "inputformat": "ogg",
             "outputformat": "mp3",
             "input": "upload",
-            "file": open(path.join(path.dirname(path.realpath(file_path+'.ogg')), file_path+'.ogg'), 'rb')
+            "file": open(path.join(path.dirname(path.realpath(file_name+'.ogg')), file_name+'.ogg'), 'rb')
         })
         process.wait()
     except:
-        if path.exists(file_path + '.ogg'):
+        if path.exists(file_name + '.ogg'):
             print('zero remove')
-            os.remove(file_path+'.ogg')
-            print(path.exists(file_path + '.ogg'))
+            os.remove(file_name+'.ogg')
+            print(path.exists(file_name + '.ogg'))
             messages = ["Something goes wrong!😢", "Try later. 😉"]
             for txt in messages:
                 bot.send_message(chat_id=chat_id, text=txt)
@@ -77,24 +84,24 @@ def handle_voice(update):
     process.download() # create mp3 file
 
     voice_text = None
-    with open(path.join(path.dirname(path.realpath(file_path + '.mp3')), file_path + '.mp3'), 'rb') as file:
+    with open(path.join(path.dirname(path.realpath(file_name + '.mp3')), file_name + '.mp3'), 'rb') as file:
         try:
             voice_text = voice_client.speech(file, headers={'Content-Type': 'audio/mpeg'})
         except:
-            if path.exists(file_path+'.ogg') and path.exists(file_path+'.mp3'):
+            if path.exists(file_name+'.ogg') and path.exists(file_name+'.mp3'):
                 print("the first exists")
-                os.remove(file_path+'.ogg')
-                os.remove(file_path+'.mp3')
-                print(path.exists(file_path + '.ogg'), path.exists(file_path + '.mp3'))
+                os.remove(file_name+'.ogg')
+                os.remove(file_name+'.mp3')
+                print(path.exists(file_name + '.ogg'), path.exists(file_name + '.mp3'))
                 return bot.send_message(chat_id=chat_id,text="Couldn't recognize what you said ☹")
 
 
     send_translate(bot,chat_id,voice_text['_text']) # send result
-    if path.exists(file_path + '.ogg') and path.exists(file_path + '.mp3'):
+    if path.exists(file_name + '.ogg') and path.exists(file_name + '.mp3'):
         print("the second exists")
-        os.remove(file_path + '.ogg')
-        os.remove(file_path + '.mp3')
-        print(path.exists(file_path + '.ogg'), path.exists(file_path + '.mp3'))
+        os.remove(file_name + '.ogg')
+        os.remove(file_name + '.mp3')
+        print(path.exists(file_name + '.ogg'), path.exists(file_name + '.mp3'))
 
 
 @app.route('/webhook/', methods=['POST',])
