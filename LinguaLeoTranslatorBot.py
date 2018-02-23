@@ -102,10 +102,12 @@ def handle_update():
     update_dict = request.data
     print(update_dict)
     update = Update(json.loads(update_dict))
-    if update.Message.Text[0] == '/':
-        handle_command(update)
-    elif update.Message.Text is not None:
-        send_translate(bot,chat_id=update.Message.Chat.id,text=update.Message.Text)
+
+    if update.Message.Text is not None:
+        if update.Message.Text[0] == '/':
+            handle_command(update)
+        else:
+            send_translate(bot,chat_id=update.Message.Chat.id,text=update.Message.Text)
     elif update.Message.Voice is not None:
         if update.Message.Chat.id == 164898079:
             handle_voice(update)
