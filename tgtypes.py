@@ -99,7 +99,11 @@ class Message():
         #photo
         #sticker
         #video
-        self.Voice = message_dict.get('voice')
+        vc = message_dict.get('voice')
+        if vc is not None:
+            vc = Voice(vc)
+        self.Voice = vc
+
         #video_note
         #caption
 
