@@ -143,9 +143,9 @@ def handle_update():
     print(update_dict)
     update = Update(json.loads(update_dict))
     if update.InlineQuery is not None:
-        message_processing(update)
-    else:
         inline_processing(update)
+    else:
+        message_processing(update)
     return make_response(('Ok',200,))
 
 
