@@ -1,5 +1,7 @@
 import requests
+import json
 import tgtypes
+
 
 class Bot():
     def __init__(self,token):
@@ -67,6 +69,6 @@ class Bot():
         :param results: list of InlineQueryResult
         :return:
         """
-        args = dict(inline_query_id = inline_query_id,results = results)
+        args = dict(inline_query_id = inline_query_id,results = json.dumps(results))
         conn = requests.get(self.url+'answerInlineQuery',params=args)
         return conn.json()
