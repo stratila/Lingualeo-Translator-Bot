@@ -118,6 +118,7 @@ def inline_processing(update):
                                            ).serialized()
                     for translate,picture in zip(translate_obj.translates, translate_obj.pictures)
                     ]
+    print(inlq_results)
     bot.answer_inline_query(inline_query_id=id,results=inlq_results)
 
 def message_processing(update):
