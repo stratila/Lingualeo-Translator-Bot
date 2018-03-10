@@ -119,7 +119,8 @@ def inline_processing(update):
                     for translate,picture in zip(translate_obj.translates, translate_obj.pictures)
                     ]
     print(inlq_results)
-    bot.answer_inline_query(inline_query_id=id,results=inlq_results)
+    sa = bot.answer_inline_query(inline_query_id=id,results=inlq_results)
+    print(sa)
 
 def message_processing(update):
     if update.Message.Text is not None:
