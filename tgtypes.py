@@ -2,7 +2,11 @@
 class Update():
     def __init__(self, json_str):
         self.UpdateId = json_str.get('update_id')  # int
-        self.Message = Message(json_str.get('message'))  # message
+
+        m = json_str.get('message')
+        if m is not None:
+            m = Message(m)
+        self.Message = m # message
 
         iq = json_str.get('inline_query')
         if iq is not None:
