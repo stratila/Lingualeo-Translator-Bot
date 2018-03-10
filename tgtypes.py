@@ -1,7 +1,13 @@
+
 class Update():
     def __init__(self, json_str):
         self.UpdateId = json_str.get('update_id')  # int
         self.Message = Message(json_str.get('message'))  # message
+
+        iq = json_str.get('inline_query')
+        if iq is not None:
+            iq = InlineQuery(iq)
+        self.InlineQuery = iq
 
 class User():
     def __init__(self, user_dict):
@@ -136,14 +142,44 @@ class Audio():
         self.FileSize = audio_dict.get('file_size')
 
 
-
-
-
-
-
 class Voice():
     def __init__(self,voice_dict):
         self.FileId = voice_dict.get('file_id')
         self.Duration = voice_dict.get('duration')
         self.MimeType = voice_dict.get('mime_type')
         self.FileSize = voice_dict.get('file_size')
+
+class InlineQuery():
+    def __init__(self,inlq_dict):
+        self.Id = inlq_dict.get('id')
+        self.From = User(inlq_dict.get('from'))
+        self.Query = inlq_dict.get('query')
+        self.Offset = inlq_dict.get('offset')
+
+class InlineQueryResultPhoto():
+    def __init__(self,id,photo_url,thumb_url,title,description,input_message_content):
+        self.Type = 'photo'
+        self.Id = id
+        self.PhotoUrl = photo_url
+        self.ThumbUrl = thumb_url
+        self.Title = title
+        self.Description = description
+        self.InputMessageContent = input_message_content
+
+    def serialized(self):
+        return dict(type = self.Type,
+                               id = self.Id,
+                               photo_url = self.PhotoUrl,
+                               thumb_url = self.ThumbUrl,
+                               title =self.Title,
+                               description = self.Description,
+                               input_message_content = self.InputMessageContent.serialized())
+
+
+class InputTextMessageContent():
+    def __init__(self,message_text):
+        self.MessageText = message_text
+
+    def serialized(self):
+        return dict(message_text = self.MessageText)
+

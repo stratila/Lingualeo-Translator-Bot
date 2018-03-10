@@ -12,6 +12,7 @@ class TranslateData:
             self.is_valid = True
             self.__picture = data.get('pic_url')
             self.__translates = [word.get('value') for word in data.get('translate')]
+            self.__pictures = [word.get('pic_url') for word in data.get('translate')]
             self.__transcription = data.get('transcription')
             self.__default_sound = data.get('sound_url')
             m = re.search(r'/[\w-]+\.mp3',self.__default_sound )
@@ -30,6 +31,10 @@ class TranslateData:
     @property
     def translates(self):
         return self.__translates
+
+    @property
+    def pictures(self):
+        return self.__pictures
 
     @property
     def transcription(self):

@@ -1,7 +1,7 @@
 from flask import Flask, request, make_response
 from tgbot import Bot
-from tgtypes import Update
-from translate import send_translate
+from tgtypes import Update, InlineQuery, InlineQueryResultPhoto, InputTextMessageContent
+from translate import send_translate, get_translates
 import start_command
 import help_command
 import json
@@ -104,12 +104,23 @@ def handle_voice(update):
         print(path.exists(file_name + '.ogg'), path.exists(file_name + '.mp3'))
 
 
-@app.route('/webhook/', methods=['POST',])
-def handle_update():
-    update_dict = request.data
-    print(update_dict)
-    update = Update(json.loads(update_dict))
 
+def inline_processing(update):
+    text = update.InlineQuery.Query
+    id = update.InlineQuery.Id
+    translate_obj = get_translates(text)
+    inlq_results = [InlineQueryResultPhoto(id=picture,
+                                           photo_url=picture,
+                                           thumb_url=picture,
+                                           title='❤',
+                                           description=translate,
+                                           input_message_content=InputTextMessageContent(message_text=translate)
+                                           ).serialized()
+                    for translate,picture in zip(translate_obj.translates, translate_obj.pictures)
+                    ]
+    bot.answer_inline_query(inline_query_id=id,results=inlq_results)
+
+def message_processing(update):
     if update.Message.Text is not None:
         if update.Message.Text[0] == '/':
             handle_command(update)
@@ -122,6 +133,19 @@ def handle_update():
             bot.send_message(update.Message.Chat.id, "Voice recognition temporary is not available. 🤐")
     else:
         bot.send_message(update.Message.Chat.id,"Hmm... 🤔🤔🤔 Try to send something else.")
+
+
+
+@app.route('/webhook/', methods=['POST',])
+def handle_update():
+
+    update_dict = request.data
+    print(update_dict)
+    update = Update(json.loads(update_dict))
+    if update.InlineQuery is not None:
+        message_processing(update)
+    else:
+        inline_processing(update)
     return make_response(('Ok',200,))
 
 

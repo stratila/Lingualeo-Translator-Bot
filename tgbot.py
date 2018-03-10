@@ -58,4 +58,15 @@ class Bot():
         """
         args = dict(file_id = file_id)
         conn = requests.get(self.url+'getFile',params=args)
-        return  conn.json()
+        return conn.json()
+
+    def answer_inline_query(self,inline_query_id,results):
+        """
+
+        :param inline_query_id: unique query id from tgtypes.InlineQuery
+        :param results: list of InlineQueryResult
+        :return:
+        """
+        args = dict(inline_query_id = inline_query_id,results = results)
+        conn = requests.get(self.url+'answerInlineQuery',params=args)
+        return conn.json()
