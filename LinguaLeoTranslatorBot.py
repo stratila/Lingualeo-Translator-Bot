@@ -50,7 +50,7 @@ def handle_command(update):
             bot.send_message(chat_id,"Please write a russian word after /ru command 😊")
             return
         text = update.Message.Text[3:len(update.Message.Text)]
-        handle_russian(id,text)
+        handle_russian(chat_id,text)
     else:
         bot.send_message(chat_id=chat_id,text='Oops! Unknown command 🤷')
 
