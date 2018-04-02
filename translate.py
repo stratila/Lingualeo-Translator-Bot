@@ -59,7 +59,8 @@ def send_translate(bot,chat_id,text):
     translate_result = get_translates(text)
 
     if not translate_result:
-        sending_text = 'There is no translate for *%s*' % text
+        sending_text = 'There is no translate for *%s* 🤔 \n See ' \
+                       '\\help command if you want to translate from Russian' % text
         return bot.send_message(chat_id=chat_id,
                                 text = sending_text,
                                 parse_mode=bot.parse_mode_markdown)

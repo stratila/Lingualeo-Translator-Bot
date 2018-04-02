@@ -44,6 +44,13 @@ def handle_command(update):
                          text=start_command.start(),
                          parse_mode=bot.parse_mode_markdown,
                          disable_web_page_preview=True)
+    # /toru
+    elif update.Message.Text[0:3] == '/ru':
+        if len(update.Message.Text) == 3:
+            bot.send_message(chat_id,"Please write a russian word after \\ru command 😊")
+            return
+        text = update.Message.Text[3:len(update.Message.Text)]
+        handle_russian(id,text)
     else:
         bot.send_message(chat_id=chat_id,text='Oops! Unknown command 🤷')
 
@@ -125,9 +132,7 @@ def inline_processing(update):
     print(sa)
 
 
-def handle_russian(update):
-    id = update.Message.Chat.id
-    text = update.Message.Text
+def handle_russian(id,text):
     ru_res = yandex_translate_client.translate(text, 'ru-en')
     if ru_res['code'] == 200:
         try:
@@ -147,10 +152,7 @@ def message_processing(update):
         if text[0] == '/':
             handle_command(update)
         else:
-            if update.Message.From.LanguageCode == 'ru-ru':
-                handle_russian(update)
-            else:
-                send_translate(bot,chat_id=id,text=text)
+            send_translate(bot,chat_id=id,text=text)
     elif update.Message.Voice is not None:
         if id == 164898079:
             handle_voice(update)
