@@ -47,7 +47,7 @@ def handle_command(update):
     # /toru
     elif update.Message.Text[0:3] == '/ru':
         if len(update.Message.Text) == 3:
-            bot.send_message(chat_id,"Please write a russian word after \\ru command 😊")
+            bot.send_message(chat_id,"Please write a russian word after /ru command 😊")
             return
         text = update.Message.Text[3:len(update.Message.Text)]
         handle_russian(id,text)
