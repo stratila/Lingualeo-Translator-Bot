@@ -12,13 +12,15 @@ import urllib.request
 import cloudconvert
 import random
 import string
-
+from yandex_translate import YandexTranslate
 
 app = Flask(__name__)
 bot = Bot('486458556:AAHOgHe39oNIYJgUOxzf-hH6Hp28mBAXF3I')
 convert_client = cloudconvert.Api("_xzKzdqMWtaqtLEQEVuKJZtG47rL4ck70zeYU" 
                                   "-_C2VKdU17V3tAIqhPoR4eYm6mxBwjfFgNP3OlecWtWO6uSyg")
 voice_client = Wit(access_token="EFM2XCEDOKQVQDA5PGDYWEZYH3PXMYOT")
+yandex_translate_client = YandexTranslate('trnsl.1.1.20180402T150037Z.e24656ad89e0c713.'
+                                          'ee18a5ad15ff39607cbbe5a953ac5d9856a09786')
 
 
 @app.route('/')
@@ -122,19 +124,40 @@ def inline_processing(update):
     sa = bot.answer_inline_query(inline_query_id=id,results=inlq_results)
     print(sa)
 
+
+def handle_russian(update):
+    id = update.Message.Chat.id
+    text = update.Message.Text
+    ru_res = yandex_translate_client.translate(text, 'ru-en')
+    if ru_res['code'] == 200:
+        try:
+            ru_text = ru_res['text'][0]
+            bot.send_message(id, ru_text)
+        except:
+            bot.send_message(id, "Oh, I'm so sorry. ☹"
+                                 "\nI couldn't translate this.")
+    else:
+        bot.send_message(id, "Something went wrong. 🦁\nTry again!")
+
+
 def message_processing(update):
-    if update.Message.Text is not None:
-        if update.Message.Text[0] == '/':
+    id = update.Message.Chat.id
+    text = update.Message.Text
+    if text is not None:
+        if text[0] == '/':
             handle_command(update)
         else:
-            send_translate(bot,chat_id=update.Message.Chat.id,text=update.Message.Text)
+            if update.Message.From.LanguageCode == 'ru-ru':
+                handle_russian(update)
+            else:
+                send_translate(bot,chat_id=id,text=text)
     elif update.Message.Voice is not None:
-        if update.Message.Chat.id == 164898079:
+        if id == 164898079:
             handle_voice(update)
         else:
-            bot.send_message(update.Message.Chat.id, "Voice recognition temporary is not available. 🤐")
+            bot.send_message(id, "Voice recognition temporary is not available. 🤐")
     else:
-        bot.send_message(update.Message.Chat.id,"Hmm... 🤔🤔🤔 Try to send something else.")
+        bot.send_message(update.id,"Hmm... 🤔🤔🤔 Try to send something else.")
 
 
 

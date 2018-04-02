@@ -27,3 +27,4 @@ virtualenv==15.1.0
 wcwidth==0.1.7
 Werkzeug==0.12.2
 wit==5.0.0
+yandex.translate==0.3.5
