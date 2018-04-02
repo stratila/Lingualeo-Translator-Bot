@@ -138,7 +138,7 @@ def handle_russian(chat_id,text):
     if ru_res['code'] == 200:
             if(len(ru_res['text']) != 0):
                 ru_text = ru_res['text'][0]
-                print(id)
+                print(chat_id)
                 print(ru_text)
                 bot.send_message(chat_id, ru_text)
             else:
