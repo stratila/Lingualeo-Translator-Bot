@@ -132,7 +132,7 @@ def inline_processing(update):
     print(sa)
 
 
-def handle_russian(id,text):
+def handle_russian(chat_id,text):
     ru_res = yandex_translate_client.translate(text, 'ru-en')
     print(ru_res)
     if ru_res['code'] == 200:
@@ -140,11 +140,11 @@ def handle_russian(id,text):
                 ru_text = ru_res['text'][0]
                 print(id)
                 print(ru_text)
-                bot.send_message(id, ru_text)
+                bot.send_message(chat_id, ru_text)
             else:
-                bot.send_message(id, "Something went wrong")
+                bot.send_message(chat_id, "Something went wrong")
     else:
-        bot.send_message(id, "Something went wrong. 🦁\nTry again!")
+        bot.send_message(chat_id, "Something went wrong. 🦁\nTry again!")
 
 
 def message_processing(update):
