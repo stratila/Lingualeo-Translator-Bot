@@ -16,8 +16,8 @@
       <file leaf-file-name="LinguaLeoTranslatorBot.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/LinguaLeoTranslatorBot.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="449">
-              <caret line="152" column="26" lean-forward="true" selection-start-line="152" selection-start-column="26" selection-end-line="152" selection-end-column="26" />
+            <state relative-caret-position="177">
+              <caret line="139" column="43" lean-forward="false" selection-start-line="139" selection-start-column="43" selection-end-line="139" selection-end-column="43" />
               <folding>
                 <element signature="e#0#47#0" expanded="true" />
               </folding>
@@ -409,8 +409,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/LinguaLeoTranslatorBot.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="449">
-          <caret line="152" column="26" lean-forward="true" selection-start-line="152" selection-start-column="26" selection-end-line="152" selection-end-column="26" />
+        <state relative-caret-position="177">
+          <caret line="139" column="43" lean-forward="false" selection-start-line="139" selection-start-column="43" selection-end-line="139" selection-end-column="43" />
           <folding>
             <element signature="e#0#47#0" expanded="true" />
           </folding>

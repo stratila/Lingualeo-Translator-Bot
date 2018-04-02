@@ -138,7 +138,6 @@ def handle_russian(id,text):
     if ru_res['code'] == 200:
             if(len(ru_res['text']) != 0):
                 ru_text = ru_res['text'][0]
-                print(id + ' ' + ru_text)
                 bot.send_message(id, ru_text)
             else:
                 bot.send_message(id, "Something went wrong")
