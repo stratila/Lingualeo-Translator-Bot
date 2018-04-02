@@ -148,20 +148,20 @@ def handle_russian(chat_id,text):
 
 
 def message_processing(update):
-    id = update.Message.Chat.id
+    cid = update.Message.Chat.id
     text = update.Message.Text
     if text is not None:
         if text[0] == '/':
             handle_command(update)
         else:
-            send_translate(bot,chat_id=id,text=text)
+            send_translate(bot,chat_id=cid,text=text)
     elif update.Message.Voice is not None:
         if id == 164898079:
             handle_voice(update)
         else:
-            bot.send_message(id, "Voice recognition temporary is not available. 🤐")
+            bot.send_message(cid, "Voice recognition temporary is not available. 🤐")
     else:
-        bot.send_message(update.id,"Hmm... 🤔🤔🤔 Try to send something else.")
+        bot.send_message(update.cid,"Hmm... 🤔🤔🤔 Try to send something else.")
 
 
 
