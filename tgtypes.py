@@ -6,7 +6,7 @@ class Update():
         m = json_str.get('message')
         if m is None:
             m = json_str.get('edited_message')
-            
+
         if m is not None:
             m = Message(m)
         self.Message = m # message

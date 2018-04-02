@@ -134,6 +134,7 @@ def inline_processing(update):
 
 def handle_russian(id,text):
     ru_res = yandex_translate_client.translate(text, 'ru-en')
+    print(ru_res)
     if ru_res['code'] == 200:
         try:
             ru_text = ru_res['text'][0]
