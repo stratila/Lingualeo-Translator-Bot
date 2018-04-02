@@ -136,13 +136,12 @@ def handle_russian(id,text):
     ru_res = yandex_translate_client.translate(text, 'ru-en')
     print(ru_res)
     if ru_res['code'] == 200:
-        try:
-            ru_text = ru_res['text'][0]
-            print(id + ' ' + ru_text)
-            bot.send_message(id, ru_text)
-        except:
-            bot.send_message(id, "Oh, I'm so sorry. ☹"
-                                 "\nI couldn't translate this.")
+            if(len(ru_res['text']) != 0):
+                ru_text = ru_res['text'][0]
+                print(id + ' ' + ru_text)
+                bot.send_message(id, ru_text)
+            else:
+                bot.send_message(id, "Something went wrong")
     else:
         bot.send_message(id, "Something went wrong. 🦁\nTry again!")
 
