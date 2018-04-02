@@ -138,6 +138,7 @@ def handle_russian(id,text):
     if ru_res['code'] == 200:
         try:
             ru_text = ru_res['text'][0]
+            print(id + ' ' + ru_text)
             bot.send_message(id, ru_text)
         except:
             bot.send_message(id, "Oh, I'm so sorry. ☹"
