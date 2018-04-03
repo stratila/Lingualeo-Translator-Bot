@@ -1,4 +1,4 @@
-from flask import Flask, request, make_response
+﻿from flask import Flask, request, make_response
 from tgbot import Bot
 from tgtypes import Update, InlineQuery, InlineQueryResultPhoto, InputTextMessageContent
 from translate import send_translate, get_translates
@@ -156,7 +156,7 @@ def message_processing(update):
         else:
             send_translate(bot,chat_id=cid,text=text)
     elif update.Message.Voice is not None:
-        if id == 164898079:
+        if cid == 164898079:
             handle_voice(update)
         else:
             bot.send_message(cid, "Voice recognition temporary is not available. 🤐")
